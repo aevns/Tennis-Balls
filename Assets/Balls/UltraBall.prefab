@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7642503631747228293}
   - component: {fileID: 2730707143786530190}
   m_Layer: 0
-  m_Name: Tennis Ball (no drag)
+  m_Name: UltraBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,9 +126,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.0329
   mass: 0.057
-  airDensity: 1.1455
+  airDensity: 0
   dragCoefficient: 0
-  coefficientOfRestitution: 0.6
+  coefficientOfRestitution: 1
 --- !u!96 &2730707143786530190
 TrailRenderer:
   serializedVersion: 2

@@ -696,6 +696,12 @@ PrefabInstance:
       propertyPath: savingMessage
       value: 
       objectReference: {fileID: 2120282498}
+    - target: {fileID: 2467482220590822041, guid: e493207ac33e27947bdaa322872a2ca3,
+        type: 3}
+      propertyPath: ballPrefab
+      value: 
+      objectReference: {fileID: 7642503631747228293, guid: 54583894136fc3b40a26ff25fa9ce5b4,
+        type: 3}
     - target: {fileID: 8736208744912413118, guid: e493207ac33e27947bdaa322872a2ca3,
         type: 3}
       propertyPath: m_LocalPosition.x

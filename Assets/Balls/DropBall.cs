@@ -34,8 +34,8 @@ public class DropBall : MonoBehaviour
     public void Initialize(Vector3 initialVelocity)
     {
         SphereCollider collider = GetComponent<SphereCollider>();
-        collider.radius = radius / (2 * transform.localScale.x);
-
+        collider.radius = radius / transform.localScale.x;
+        
         PhysicMaterial material = collider.material ?? (collider.sharedMaterial = new PhysicMaterial());
         material.bounceCombine = PhysicMaterialCombine.Minimum;
         material.bounciness = coefficientOfRestitution;
@@ -109,4 +109,12 @@ public class DropBall : MonoBehaviour
 #endif
         velocity += Acceleration(velocity, Time.fixedDeltaTime);
     }
+
+    // To closely match analytic solution, assume no energy is lost to friction / rotation
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    Vector3 nv = collision.contacts[0].normal * Vector3.Dot(collision.relativeVelocity, collision.contacts[0].normal);
+    //    Vector3 v = -collision.relativeVelocity + nv * (1 + coefficientOfRestitution);
+    //    velocity = v;
+    //}
 }

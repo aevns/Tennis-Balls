@@ -62,17 +62,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraCount: 3
   meanCameraDistance: 2.5
-  minCameraDistance: 0.25
+  minCameraDistance: 0.1
+  meanTargetTime: 0.75
   meanCameraHeight: 1
   minCameraHeight: 0.25
-  meanCameraTilt: 0.5
-  meanCameraFocalLength: 100
-  minCameraFocalLength: 8
-  meanCameraLensShift: 0.1
-  meanTargetDistance: 0.5
-  meanTargetTime: 0.75
-  meanBallHeight: 1
-  meanBallVelocity: 4
+  meanCameraOffset: 0.16666667
+  meanCameraTilt: 0.75
+  meanCameraFocalLength: 25
+  minCameraFocalLength: 5
+  meanCameraLensShift: 0.15
+  meanBallHeight: 1.5
+  meanBallVelocity: 3
+  minBallEnergy: 1
   recordData: 1
   ballPrefab: {fileID: 7642503631747228293, guid: 5ac3e8fb9c4464348b9e7896049b618e,
     type: 3}
