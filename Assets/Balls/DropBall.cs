@@ -99,8 +99,6 @@ public class DropBall : MonoBehaviour
 
     /// <summary>
     /// Applying acceleration in the physics update.
-    /// The physics engine uses the semi-explicit euler method, which isn't ideal.
-    /// We'll just switch it to leapfrog integration instead.
     /// </summary>
     private void FixedUpdate()
     {
