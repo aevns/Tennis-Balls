@@ -37,7 +37,11 @@ public class DropController : MonoBehaviour
 
     private void PlaceBall()
     {
-        if (ball != null) { Destroy(ball.gameObject); }
+        if (ball != null)
+        {
+            ball.gameObject.SetActive(false);
+            Destroy(ball.gameObject);
+        }
 
         Vector3 spawnPoint = Vector3.up * Random.value * meanBallHeight * 2;
         Vector3 spawnVelocity = Random.insideUnitSphere.normalized * Random.value * meanBallVelocity * 2;
