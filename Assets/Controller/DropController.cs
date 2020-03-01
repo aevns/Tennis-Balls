@@ -56,6 +56,7 @@ public class DropController : MonoBehaviour
             if (cameras.Count <= i)
                 cameras.Add(Instantiate(cameraPrefab));
             PlaceCamera(cameras[i]);
+            cameras[i].forceIntoRenderTexture = true;
         }
     }
 

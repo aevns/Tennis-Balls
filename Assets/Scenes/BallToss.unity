@@ -696,11 +696,6 @@ PrefabInstance:
       propertyPath: savingMessage
       value: 
       objectReference: {fileID: 2120282498}
-    - target: {fileID: 2467482220590822041, guid: e493207ac33e27947bdaa322872a2ca3,
-        type: 3}
-      propertyPath: recordData
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8736208744912413118, guid: e493207ac33e27947bdaa322872a2ca3,
         type: 3}
       propertyPath: m_LocalPosition.x

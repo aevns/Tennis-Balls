@@ -37,13 +37,13 @@ public class DropData
     public void SaveData()
     {
         string saveDirectory = CreateSaveDirectory();
-        for (int i = 0; i < camerasData.Count; i++)
-        {
-            camerasData[i].SaveVideo(saveDirectory + "/camera_" + i);
-        }
         XmlSerializer serializer = new XmlSerializer(typeof(DropData));
         TextWriter writer = new StreamWriter(saveDirectory + "/data.xml");
         serializer.Serialize(writer, this);
         writer.Close();
+        for (int i = 0; i < camerasData.Count; i++)
+        {
+            camerasData[i].SaveVideo(saveDirectory + "/camera_" + i);
+        }
     }
 }

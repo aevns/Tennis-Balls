@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DropRecorder : MonoBehaviour
 {
-
     public int physicsStepsPerFrame = 8;
     public int recordingFrameRate = 60;
     public float recordingDuration = 3;
@@ -46,6 +45,8 @@ public class DropRecorder : MonoBehaviour
         yield return null;
 
         data.SaveData();
+        yield return null;
+
         data = null;
         ready = true;
         savingMessage.SetActive(false);

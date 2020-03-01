@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class CameraData
 {
-    public struct IntrinsicMatrix
-    {
-        public float
-            m00, m01, m02, m03, m04,
-            m10, m11, m12, m13, m14,
-            m20, m21, m22, m23, m24;
-    }
-
     private Camera camera;
     private Texture2D writeTexture;
     private List<RenderTexture> textureBuffer;
@@ -23,24 +15,10 @@ public class CameraData
         get { return camera.transform.position; }
         set { }
     }
-    public Vector3 forward
-    {
-        get { return camera.transform.forward; }
-        set { }
-    }
-    public Vector3 up
-    {
-        get { return camera.transform.up; }
-        set { }
-    }
+
     public Quaternion rotation
     {
         get { return camera.transform.rotation; }
-        set { }
-    }
-    public Matrix4x4 localToWorldMatrix
-    {
-        get { return camera.transform.localToWorldMatrix; }
         set { }
     }
 
@@ -49,26 +27,45 @@ public class CameraData
         get { return camera.focalLength; }
         set { }
     }
-    public IntrinsicMatrix intrinsicMatrix
+
+    public Matrix4x4 extrinsicMatrix
+    {
+        get { return GetExtrinsicParameters(); }
+        set { }
+    }
+
+    public Matrix4x4 intrinsicMatrix
     {
         get { return GetIntrinsicParameters(); }
         set { }
     }
 
-    private IntrinsicMatrix GetIntrinsicParameters()
+    private Matrix4x4 GetExtrinsicParameters()
     {
-        float focalLength = camera.focalLength;
-        float xScale = camera.pixelWidth;
-        float yScale = camera.pixelHeight;
-        float xPoint = xScale * camera.lensShift.x;
-        float yPoint = yScale * camera.lensShift.y;
+        Quaternion worldToCameraRotation = Quaternion.Inverse(camera.transform.rotation);
+        Vector4 t = worldToCameraRotation * -camera.transform.position;
+        Matrix4x4 mat = Matrix4x4.Rotate(worldToCameraRotation);
+        mat[0, 3] = t[0];
+        mat[1, 3] = t[1];
+        mat[2, 3] = t[2];
+        mat[3, 3] = 1;
+        return mat;
+    }
 
-        IntrinsicMatrix intrinsicParameters = new IntrinsicMatrix();
-        intrinsicParameters.m00 = focalLength * xScale;
-        intrinsicParameters.m11 = focalLength * yScale;
-        // For this example, camera skew is 0
-        intrinsicParameters.m02 = xPoint;
-        intrinsicParameters.m12 = yPoint;
+    private Matrix4x4 GetIntrinsicParameters()
+    {
+        Vector2 shift = camera.GetGateFittedLensShift();
+
+        float unitLengthGateHeight = 2 * Mathf.Tan(camera.GetGateFittedFieldOfView() * 0.5f * Mathf.Deg2Rad);
+        float widthInPixels = camera.targetTexture.width;
+        float heightInPixels = camera.targetTexture.height;
+
+        Matrix4x4 intrinsicParameters = new Matrix4x4();
+        intrinsicParameters.m00 = widthInPixels / (unitLengthGateHeight * camera.aspect);
+        intrinsicParameters.m11 = heightInPixels / unitLengthGateHeight;
+        // For these examples, camera skew at m01 is 0
+        intrinsicParameters.m02 = -shift.x * widthInPixels;
+        intrinsicParameters.m12 = -shift.y * heightInPixels;
         intrinsicParameters.m22 = 1;
 
         return intrinsicParameters;
@@ -106,6 +103,11 @@ public class CameraData
             writeTexture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             byte[] bytes = writeTexture.EncodeToPNG();
             System.IO.File.WriteAllBytes(directory + "/frame_" + string.Format("{0:D3}", i) + ".png", bytes);
+        }
+        RenderTexture.active = null;
+        for (int i = 0; i < textureBuffer.Count; i++)
+        {
+            textureBuffer[i].Release();
         }
     }
 }

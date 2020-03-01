@@ -47,6 +47,7 @@ MonoBehaviour:
   physicsStepsPerFrame: 16
   recordingFrameRate: 60
   recordingDuration: 2
+  savingMessage: {fileID: 0}
 --- !u!114 &2467482220590822041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraCount: 3
-  meanCameraDistance: 3
-  minCameraDistance: 0.5
+  meanCameraDistance: 2.5
+  minCameraDistance: 0.25
   meanCameraHeight: 1
   minCameraHeight: 0.25
   meanCameraTilt: 0.5
